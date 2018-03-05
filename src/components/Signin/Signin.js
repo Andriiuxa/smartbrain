@@ -18,7 +18,7 @@ class Signin extends React.Component {
   }
 
   onSubmitSignIn = () => {
-    fetch('https://aqueous-depths-62946.herokuapp.com/signin', {
+    fetch('http://localhost:3000/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -26,19 +26,19 @@ class Signin extends React.Component {
         password: this.state.signInPassword
       })
     })
-    .then(response => response.json())
-    .then(user => {
-      if(user.id){
-        this.props.loadUser(user);
-        this.props.onRouteChange('home');
-      }
-    })
+      .then(response => response.json())
+      .then(user => {
+        if (user.id) {
+          this.props.loadUser(user)
+          this.props.onRouteChange('home');
+        }
+      })
   }
 
   render() {
     const { onRouteChange } = this.props;
-    return(
-      <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+    return (
+      <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
         <main className="pa4 black-80">
           <div className="measure">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
@@ -60,19 +60,20 @@ class Signin extends React.Component {
                   type="password"
                   name="password"
                   id="password"
-                  onChange = {this.onPasswordChange}
+                  onChange={this.onPasswordChange}
                 />
               </div>
             </fieldset>
-              <div className="">
-                <input
-                  onClick={this.onSubmitSignIn}
-                  className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                  type="submit"
-                  value="Sign in" />
-              </div>
-              <div className="lh-copy mt3">
-                <p onClick={() => onRouteChange('register')} className="f6 link dim black db pointer">Register</p>
+            <div className="">
+              <input
+                onClick={this.onSubmitSignIn}
+                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                type="submit"
+                value="Sign in"
+              />
+            </div>
+            <div className="lh-copy mt3">
+              <p  onClick={() => onRouteChange('register')} className="f6 link dim black db pointer">Register</p>
             </div>
           </div>
         </main>
